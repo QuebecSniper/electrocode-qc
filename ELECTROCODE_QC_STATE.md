@@ -1,6 +1,6 @@
 # ÉlectroCode QC — État du projet
 
-**Source de vérité de la boucle autonome.** Tout le travail reste dans le dossier `application électricien`. Remote GitHub : **pas encore créé** (fichiers prêts — `docs/GITHUB_PREP.md`).
+**Source de vérité de la boucle autonome.** Dépôt : `https://github.com/QuebecSniper/electrocode-qc.git` (privé). Moteur V1 gelé : pas de nouvelles règles de calcul.
 
 ## Vision et objectifs
 
@@ -10,7 +10,8 @@ V1 : résidentiel complet. Commercial / institutionnel / industriel : structuré
 
 ## % d’avancement
 
-**90 % de la V1 résidentielle — GELÉE** (2026-08-15, Cycle 3 accepté). Pas d’élargissement du moteur résidentiel tant que le gel n’est pas levé.
+**93 % de la V1 résidentielle** — Cycle 4 (interface terrain).  
+Règles de calcul toujours **gelées** au palier Cycle 3 (90 % moteur). Pas d’élargissement du moteur.
 
 ## Version du Code électrique intégrée + date de dernière vérification
 
@@ -31,7 +32,8 @@ V1 : résidentiel complet. Commercial / institutionnel / industriel : structuré
 - Export PDF en tableaux + JSON (JSON Schema Draft 2020-12)
 - Calibre de service **imposé** : évalué, jamais surclassé silencieusement
 - Pas de LLM pour le dimensionnement
-- Dépôt local prêt (`.gitignore`, `.gitattributes`, workflows) — **aucun remote**
+- Remote GitHub privé : `QuebecSniper/electrocode-qc` (branche `main`)
+- Interface terrain Cycle 4 **validée** : cartes, gros boutons, résultat une page, disclaimer compact
 
 ## Modules développés / restants
 
@@ -45,13 +47,13 @@ V1 : résidentiel complet. Commercial / institutionnel / industriel : structuré
 - Extraction texte PDF + OCR photo
 - Recoupement Cycle 3 documenté (`docs/RECOUPEMENT_TABLES_C22.10-26.md`)
 - Tests moteur (dont recoupement T2/T4/T16/10-812) + tests Flutter
+- Interface terrain Cycle 4 : accueil, saisie groupée, questions en puces, résultat lisible au téléphone
 
 ### Restants (hors gel V1 — ne pas ouvrir maintenant)
 
 - Lever le gel seulement pour viser T9I / T10A sur l’exemplaire officiel, ou pour un essai Android
 - OCR de PDF scanné (image) : passer par une photo
 - Validation dictée/OCR sur appareil Android
-- Créer le remote GitHub et pousser (quand demandé)
 - Modules commercial / institutionnel / industriel
 - Transformateurs
 
@@ -74,7 +76,7 @@ Ces 3 écarts sont **acceptés** pour la V1. Ils ne bloquent pas le dimensionnem
 | STATE | `.github/workflows/update-state.yml` | sections obligatoires | créé (local) |
 | Veille Code | `.github/workflows/code-watch.yml` | pages RBQ | créé (local) |
 
-Pas de remote. Aucun push.
+Remote privé : `origin` → `https://github.com/QuebecSniper/electrocode-qc.git` (`main` poussée). CI Actions prête, pas encore observée sur le remote.
 
 ## Décisions techniques
 
@@ -86,6 +88,16 @@ Pas de remote. Aucun push.
 - `code_references.table` rempli seulement s’il existe un tableau (T2, T4, T5A, T5C, T8, T9, T10, T16)
 - JSON Schema Draft 2020-12 via Python `jsonschema`
 - Recoupement Cycle 3 : concordances publiques (electdesign, vrielectrical, guides 25e éd.). Pas de reproduction du texte CSA
+- Cycle 4 : UI seulement — aucun changement aux tables ni à `Dimensioner`. **Validé 2026-08-16.**
+
+## Interface Cycle 4 (ce qui a changé)
+
+| Écran | Avant | Après |
+|---|---|---|
+| Accueil | Liste plate, disclaimer en bandeau haut, suppression sans confirmer | Cartes chantier, statut du dernier calcul, confirmation de suppression, disclaimer compact en bas |
+| Saisie | Champs empilés, bouton perdu en bas de liste, libellés anglais (`residential`) | Sections (chantier / logement / charges / terre), bouton **Dimensionner** fixé, libellés FR, bouton « Aucune / 0 » |
+| Questions | `q.id` comme titre, tout en texte libre | Question en français, puces (chauffage, Cu/Al, terre, EMS), clavier numérique, « Continuer » désactivé tant que incomplet |
+| Résultat | 5 onglets, JSON brut, statut petit | **Une page téléphone** : CONFORME / NON CONFORME, 5 métriques, avertissements, matériel, terre/VD ; JSON dans le menu ; PDF en bas |
 
 ## Recoupement tables C22.10:26 (Cycle 3)
 
@@ -109,14 +121,21 @@ Détail : [docs/RECOUPEMENT_TABLES_C22.10-26.md](docs/RECOUPEMENT_TABLES_C22.10-
 - Flutter pas dans le PATH machine (`%USERPROFILE%\flutter`)
 - Dictée / OCR photo non validées sur appareil
 - PDF scanné sans calque texte : photo requise
-- `DropdownButtonFormField.value` déprécié (Flutter 3.33+)
-- Remote GitHub pas encore créé (commit local prêt)
 
 ## Prochaine action exacte
 
-Créer le remote GitHub et pousser **quand demandé**. V1 gelée à 90 %. **Ne pas** ouvrir commercial / institutionnel / industriel. **Ne pas** lancer les essais Android tant que ce n’est pas demandé.
+**Planifier le test sur appareil Android** (dictée fr_CA, photo/OCR, lisibilité chantier). **Ne pas** ouvrir commercial / institutionnel / industriel. **Ne pas** modifier le moteur.
 
 ## Historique des cycles
+
+### Cycle 4 — 2026-08-16 — interface terrain
+
+- Thème chantier : contrastes, polices 16–24, boutons 52 px
+- Flux Saisie → Questions (si besoin, en boucle) → Résultat une page
+- Disclaimer visible en bas d’accueil + sous le statut, sans masquer le résultat
+- Moteur **inchangé** (gel règles Cycle 3)
+- Avancement V1 : **93 %** (moteur toujours gelé à 90 %)
+- **Validé 2026-08-16**
 
 ### Cycle 3 — 2026-08-15 — recoupement tables + GitHub local
 

@@ -7,6 +7,11 @@ void main() {
   testWidgets('affiche le titre ÉlectroCode QC', (tester) async {
     await tester.pumpWidget(const ElectroCodeApp());
     expect(find.textContaining('ÉlectroCode'), findsWidgets);
+    expect(find.textContaining('Aucun chantier'), findsOneWidget);
+    expect(
+      find.textContaining('responsabilité finale appartient'),
+      findsOneWidget,
+    );
   });
 
   test('moteur résidentiel accessible depuis l\'app', () {
