@@ -1,0 +1,18 @@
+{
+  "code_version": "C22.10:26",
+  "last_verified": "2026-08-15",
+  "sources": [
+    {
+      "id": "rbq-ce-qui-sapplique",
+      "url": "https://www.rbq.gouv.qc.ca/domaines-dintervention/electricite/la-rbq-et-lelectricite/reglementation/ce-qui-sapplique"
+    },
+    {
+      "id": "rbq-modifications",
+      "url": "https://www.rbq.gouv.qc.ca/domaines-dintervention/electricite/la-rbq-et-lelectricite/reglementation/modifications-reglementaires/"
+    },
+    {
+      "id": "rbq-electricite",
+      "url": "https://www.rbq.gouv.qc.ca/lois-reglements-et-codes/par-domaine/electricite/"
+    }
+  ]
+}

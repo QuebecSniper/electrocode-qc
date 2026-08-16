@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  lint-test-json:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - name: Engine pub get
+        run: dart pub get
+        working-directory: packages/electrocode_engine
+      - name: Analyze engine
+        run: dart analyze --fatal-infos
+        working-directory: packages/electrocode_engine
+      - name: Unit tests engine
+        run: dart test test/unit
+        working-directory: packages/electrocode_engine
+      - name: Flutter pub get
+        run: flutter pub get
+      - name: Analyze app
+        run: dart analyze
+      - name: Flutter tests
+        run: flutter test
+      - name: Installer jsonschema
+        run: pip install -r tools/requirements-ci.txt
+      - name: Validate JSON Schema (Draft 2020-12)
+        run: python3 tools/validate_json.py
+      - name: STATE.md sections
+        run: python3 tools/check_state.py

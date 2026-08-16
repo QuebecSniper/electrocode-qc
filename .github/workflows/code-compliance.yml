@@ -1,0 +1,21 @@
+name: Code compliance
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  residential-compliance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - name: Engine pub get
+        run: dart pub get
+        working-directory: packages/electrocode_engine
+      - name: Tests de conformité Code QC
+        run: dart test test/compliance
+        working-directory: packages/electrocode_engine

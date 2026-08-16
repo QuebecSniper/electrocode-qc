@@ -1,0 +1,22 @@
+name: Update STATE
+
+on:
+  push:
+    paths:
+      - "ELECTROCODE_QC_STATE.md"
+      - "tools/check_state.py"
+      - ".github/workflows/update-state.yml"
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  verify-state:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Vérifier ELECTROCODE_QC_STATE.md
+        run: python3 tools/check_state.py
+      - name: Rappeler la boucle
+        run: |
+          echo "STATE.md est la source de vérité."
+          echo "Mettre à jour : % avancement, version Code, prochaine action, historique des cycles."

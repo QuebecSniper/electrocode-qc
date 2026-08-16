@@ -1,0 +1,450 @@
+{
+  "meta": {
+    "app_version": "0.1.0",
+    "code_version": "C22.10:26",
+    "calculation_date": "2026-08-15T23:40:08.016550Z",
+    "project_name": "Bungalow Laval exemple",
+    "building_type": "residential"
+  },
+  "input": {
+    "description": "Unifamilial 120 m2 chauffage électrique",
+    "voltage": "120/240",
+    "amperage": 200.0,
+    "phases": 1,
+    "loads": [],
+    "additional_info": {
+      "ev_none": true,
+      "living_area_m2": 120.0,
+      "dwelling_units": 1,
+      "heating_type": "electric",
+      "heating_watts": 15000.0,
+      "ac_watts": null,
+      "range_watts": 12000.0,
+      "dryer_watts": 5500.0,
+      "water_heater_watts": 4500.0,
+      "ev_charger_watts": 0.0,
+      "ev_energy_management": null,
+      "ev_managed_watts": null,
+      "new_construction": true,
+      "service_material": "Cu",
+      "forced_service_conductor": null,
+      "branch_material": "Cu",
+      "service_length_m": 20.0,
+      "conduit_type": "emt",
+      "ambient_c": 30,
+      "grounding_electrode": "rods",
+      "sub_panels": []
+    }
+  },
+  "questions_asked": [],
+  "calculations": {
+    "service": {
+      "calculated_amps": 149.0,
+      "minimum_amps_8_200": 100,
+      "selected_amps": 200,
+      "ungrounded_conductor": "3/0",
+      "identified_conductor": "3/0",
+      "material": "Cu",
+      "voltage": "120/240",
+      "phases": 1,
+      "demand": {
+        "living_area_m2": 120.0,
+        "dwelling_units": 1,
+        "method": "8-200",
+        "basic_watts": 6000,
+        "heating_demand_watts": 13750,
+        "ac_watts": 0,
+        "climate_watts_used": 13750,
+        "range_demand_watts": 6000,
+        "dryer_watts": 5500,
+        "water_heater_watts": 4500,
+        "ev_watts": 0,
+        "other_watts": 0,
+        "unit_watts_8_200": 35750,
+        "total_watts": 35750,
+        "calculated_amps": 149.0,
+        "voltage": 240
+      },
+      "conductor_after_voltage_drop": "3/0",
+      "conductor_forced": false,
+      "conductor_ampacity_ok": true,
+      "ampacity_table": "T2"
+    },
+    "main_panel": {
+      "bus_amps": 200,
+      "main_breaker_amps": 200,
+      "voltage": "120/240",
+      "phases": 1,
+      "suggested_spaces": 40,
+      "notes": "Prévoir AFCI, DDFT, VÉ, chauffage et espaces de réserve. Surveillance EMS permise (6-212 2))."
+    },
+    "sub_panels": [],
+    "transformers": [],
+    "breakers": [
+      {
+        "role": "main",
+        "amps": 200,
+        "poles": 2,
+        "type": "disjoncteur_principal",
+        "notes": "Calibre de barre / coffret 200 A."
+      },
+      {
+        "role": "cuisiniere",
+        "amps": 50,
+        "poles": 2,
+        "type": "disjoncteur_branchement_secondaire",
+        "load_watts": 12000,
+        "continuous": false
+      },
+      {
+        "role": "secheuse",
+        "amps": 25,
+        "poles": 2,
+        "type": "disjoncteur_branchement_secondaire",
+        "load_watts": 5500,
+        "continuous": false
+      },
+      {
+        "role": "chauffe_eau",
+        "amps": 25,
+        "poles": 2,
+        "type": "disjoncteur_branchement_secondaire",
+        "load_watts": 4500,
+        "continuous": true
+      },
+      {
+        "role": "chauffage",
+        "amps": 80,
+        "poles": 2,
+        "type": "disjoncteur_branchement_secondaire",
+        "load_watts": 15000,
+        "continuous": true
+      }
+    ],
+    "conductors": [
+      {
+        "role": "service_entrance",
+        "size_awg_kcmil": "3/0",
+        "material": "Cu",
+        "required_amps": 200.0,
+        "allowable_amps": 200.0,
+        "insulation_temp_c": 75,
+        "ambient_factor_table_5A": 1.0,
+        "grouping_factor_table_5C": 1.0,
+        "voltage": 240,
+        "circuit_amps": 200
+      },
+      {
+        "role": "cuisiniere",
+        "size_awg_kcmil": "6",
+        "material": "Cu",
+        "required_amps": 50.0,
+        "allowable_amps": 65.0,
+        "insulation_temp_c": 75,
+        "ambient_factor_table_5A": 1.0,
+        "grouping_factor_table_5C": 1.0,
+        "voltage": 240,
+        "circuit_amps": 50
+      },
+      {
+        "role": "secheuse",
+        "size_awg_kcmil": "10",
+        "material": "Cu",
+        "required_amps": 22.9,
+        "allowable_amps": 30.0,
+        "insulation_temp_c": 75,
+        "ambient_factor_table_5A": 1.0,
+        "grouping_factor_table_5C": 1.0,
+        "voltage": 240,
+        "circuit_amps": 23
+      },
+      {
+        "role": "chauffe_eau",
+        "size_awg_kcmil": "10",
+        "material": "Cu",
+        "required_amps": 23.4,
+        "allowable_amps": 30.0,
+        "insulation_temp_c": 75,
+        "ambient_factor_table_5A": 1.0,
+        "grouping_factor_table_5C": 1.0,
+        "voltage": 240,
+        "circuit_amps": 19
+      },
+      {
+        "role": "chauffage",
+        "size_awg_kcmil": "4",
+        "material": "Cu",
+        "required_amps": 78.1,
+        "allowable_amps": 85.0,
+        "insulation_temp_c": 75,
+        "ambient_factor_table_5A": 1.0,
+        "grouping_factor_table_5C": 1.0,
+        "voltage": 240,
+        "circuit_amps": 63
+      }
+    ],
+    "conduits": [
+      {
+        "type": "emt",
+        "trade_size": "53",
+        "label": "53 (2 po)",
+        "conductor_count": 3,
+        "fill_percent_allowed": 40,
+        "conductor_area_mm2": 812.9
+      }
+    ],
+    "grounding": {
+      "electrode": "rods",
+      "grounding_electrode_conductor_cu": "6",
+      "equipment_bonding_conductor_cu": "6",
+      "municipal_water_as_new_electrode": false,
+      "conforme_section_10": true,
+      "notes": [
+        "Section 10 révisée (C22.10:26) : progression prise de terre → continuité des masses.",
+        "Conducteur d'électrode : art. 10-812 — #6 Cu pour tiges, plaque ou béton (le Tableau 17 n'est plus un tableau de calibre GEC).",
+        "Lier les canalisations métalliques d'eau du bâtiment (continuité des masses), distinct de la prise de terre.",
+        "Tiges : deux tiges typiques, espacement et profondeur selon section 10."
+      ]
+    },
+    "voltage_drop": {
+      "segments": [
+        {
+          "role": "service_or_feeder",
+          "length_m": 20.0,
+          "current_a": 200.0,
+          "voltage": 240,
+          "phases": 1,
+          "conductor": "3/0",
+          "material": "Cu",
+          "drop_volts": 1.66,
+          "drop_percent": 0.69,
+          "limit_percent": 3.0,
+          "conforme_8_102": true
+        }
+      ],
+      "worst_segment_percent": 0.69,
+      "cumulative_percent": 0.69,
+      "limit_segment_percent": 3.0,
+      "limit_total_percent": 5.0,
+      "conforme": true
+    }
+  },
+  "materials_list": [
+    {
+      "category": "Service",
+      "description": "Coffret / disjoncteur principal 200 A, 120/240 V 1ϕ",
+      "quantity": 1.0,
+      "unit": "unité",
+      "notes": "Hors niveau de crue ; extérieur permis (QC 2026)."
+    },
+    {
+      "category": "Panneau",
+      "description": "Panneau principal barre 200 A, 40+ espaces suggérés",
+      "quantity": 1.0,
+      "unit": "unité",
+      "notes": "Prévoir espaces AFCI/GFCI, VÉ et EMS (6-212 2))."
+    },
+    {
+      "category": "Conducteurs",
+      "description": "Branchement 3/0 Cu (2 non mis à la terre + 1 identifié)",
+      "quantity": 60.0,
+      "unit": "m",
+      "notes": "RW90 ou équivalent ; vérifer T19."
+    },
+    {
+      "category": "Mise à la terre",
+      "description": "Conducteur d'électrode 4 Cu + tiges/plaque selon choix",
+      "quantity": 1.0,
+      "unit": "ensemble",
+      "notes": "Section 10 révisée (C22.10:26) : progression prise de terre → continuité des masses."
+    },
+    {
+      "category": "Mise à la terre",
+      "description": "Conducteur de continuité des masses 6 Cu",
+      "quantity": 10.0,
+      "unit": "m",
+      "notes": "Tableau 16 — selon OCPD 200 A."
+    },
+    {
+      "category": "Circuit",
+      "description": "Circuit cuisinière 40/50 A — 6 Cu 40 °C/75 °C selon calibre retenu",
+      "quantity": 1.0,
+      "unit": "circuit",
+      "notes": "26-744 / 8-200."
+    },
+    {
+      "category": "Circuit",
+      "description": "Circuit sécheuse 30 A 120/240 V",
+      "quantity": 1.0,
+      "unit": "circuit",
+      "notes": "26-744."
+    },
+    {
+      "category": "Circuit",
+      "description": "Circuit chauffe-eau (charge continue 125 %)",
+      "quantity": 1.0,
+      "unit": "circuit",
+      "notes": "8-104."
+    },
+    {
+      "category": "Circuit",
+      "description": "Circuits de chauffage électrique 20/30 A 240 V",
+      "quantity": 4.0,
+      "unit": "circuit",
+      "notes": "Charge continue 125 %. Commande près lavabo : assouplissement QC 2026."
+    },
+    {
+      "category": "VÉ",
+      "description": "Infrastructure élémentaire de recharge (conduit + conducteurs ou cheminement)",
+      "quantity": 1.0,
+      "unit": "ensemble",
+      "notes": "Obligatoire dès la construction pour logements (QC 2026)."
+    },
+    {
+      "category": "Prises",
+      "description": "Prises à obturateurs (tamper-resistant) là où des enfants peuvent être présents",
+      "quantity": 1.0,
+      "unit": "lot",
+      "notes": "QC 2026 — tous les emplacements visés, pas seulement les chambres."
+    },
+    {
+      "category": "Protection",
+      "description": "Disjoncteurs AFCI / DDFT selon pièces",
+      "quantity": 5.0,
+      "unit": "unité",
+      "notes": "Clarification AFCI circuits existants (QC 2026)."
+    },
+    {
+      "category": "Canalisation",
+      "description": "EMT/PVC 53 (2 po) pour feeder/service",
+      "quantity": 20.0,
+      "unit": "m",
+      "notes": "Remplissage T8 ≤ 40 % si ≥ 3 conducteurs."
+    },
+    {
+      "category": "Conducteurs",
+      "description": "cuisiniere 6 Cu",
+      "quantity": 1.0,
+      "unit": "circuit",
+      "notes": "Ampacité admissible 65 A."
+    },
+    {
+      "category": "Conducteurs",
+      "description": "secheuse 10 Cu",
+      "quantity": 1.0,
+      "unit": "circuit",
+      "notes": "Ampacité admissible 30 A."
+    },
+    {
+      "category": "Conducteurs",
+      "description": "chauffe_eau 10 Cu",
+      "quantity": 1.0,
+      "unit": "circuit",
+      "notes": "Ampacité admissible 30 A."
+    },
+    {
+      "category": "Conducteurs",
+      "description": "chauffage 4 Cu",
+      "quantity": 1.0,
+      "unit": "circuit",
+      "notes": "Ampacité admissible 85 A."
+    }
+  ],
+  "code_references": [
+    {
+      "rule": "8-200",
+      "table": "",
+      "description": "Charge calculée d'une unité d'habitation — charge de base 5000 W / 90 m²."
+    },
+    {
+      "rule": "8-106",
+      "table": "",
+      "description": "Facteurs de demande — chauffage 100 % / 10 kW + 75 % du reste ; climatisation vs chauffage."
+    },
+    {
+      "rule": "8-104",
+      "table": "",
+      "description": "Charges continues — 125 % pour le calibre des conducteurs et de la protection."
+    },
+    {
+      "rule": "QC 2026 — infrastructure VÉ",
+      "table": "",
+      "description": "Obligation de prévoir l'infrastructure élémentaire de recharge pour logements dès la construction."
+    },
+    {
+      "rule": "8-200",
+      "table": "",
+      "description": "Ampacité minimale du branchement : 60 A si superficie ≤ 80 m², 100 A au-delà."
+    },
+    {
+      "rule": "4-004 / 4-006",
+      "table": "T2",
+      "description": "Ampacité des conducteurs de branchement — colonne 75 °C (terminaisons)."
+    },
+    {
+      "rule": "4-004",
+      "table": "T5A",
+      "description": "Facteurs de correction pour température ambiante."
+    },
+    {
+      "rule": "4-004",
+      "table": "T5C",
+      "description": "Facteurs de correction pour plus de 3 conducteurs sous tension."
+    },
+    {
+      "rule": "6",
+      "table": "",
+      "description": "Branchement : coffret hors niveau de crue ; coffret extérieur permis (QC 2026)."
+    },
+    {
+      "rule": "10-616",
+      "table": "T16",
+      "description": "Conducteur de continuité des masses — selon OCPD ou ampacité du plus gros conducteur non mis à la terre."
+    },
+    {
+      "rule": "10-812",
+      "table": "",
+      "description": "Conducteur de mise à la terre d'électrode : au moins #6 Cu pour tiges, plaque ou béton. Le Tableau 17 vise les systèmes à impédance (10-302), pas le GEC."
+    },
+    {
+      "rule": "QC 2026 section 10",
+      "table": "",
+      "description": "Interdiction de la conduite d'eau municipale comme nouvelle prise de terre."
+    },
+    {
+      "rule": "8-102",
+      "table": "",
+      "description": "Chute de tension : 3 % feeder ou dérivation, 5 % total depuis le service."
+    },
+    {
+      "rule": "14-104",
+      "table": "",
+      "description": "Calibre de protection vs ampacité ; next-size-up interdit pour #14/12/10."
+    },
+    {
+      "rule": "12",
+      "table": "T8",
+      "description": "Pourcentage maximal de remplissage des canalisations."
+    },
+    {
+      "rule": "12",
+      "table": "T9",
+      "description": "Aire interne des canalisations."
+    },
+    {
+      "rule": "12",
+      "table": "T10",
+      "description": "Aire des conducteurs isolés pour le calcul de remplissage."
+    },
+    {
+      "rule": "4-004 / 4-006",
+      "table": "T2",
+      "description": "Ampacité cuivre — T2, colonne 75 °C."
+    }
+  ],
+  "warnings": [
+    "Construction neuve : prévoir l'infrastructure élémentaire VÉ (QC 2026) même si aucune borne n'est installée maintenant."
+  ],
+  "compliance_status": "conforme",
+  "disclaimer": "Ce dimensionnement est un outil d'aide. La responsabilité finale appartient à l'électricien titulaire de la licence."
+}

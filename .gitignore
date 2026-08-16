@@ -1,0 +1,44 @@
+# Flutter / Dart
+**/*.iml
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/.packages
+**/.dart_tool/
+**/.idea/
+**/.vscode/
+**/build/
+**/doc/api/
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+build/
+*.iml
+*.ipr
+*.iws
+.DS_Store
+coverage/
+.flutter-plugins-dependencies
+packages/electrocode_engine/.dart_tool/
+packages/electrocode_engine/.packages
+
+# Android / signing
+local.properties
+**/local.properties
+*.jks
+*.keystore
+key.properties
+android/.gradle/
+android/captures/
+
+# Secrets
+.env
+.env.*
+!.env.example
+*.pem
+google-services.json
+GoogleService-Info.plist
+
+# OS
+Thumbs.db
+desktop.ini

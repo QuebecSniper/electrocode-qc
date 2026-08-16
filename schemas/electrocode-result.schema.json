@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://electrocode.qc/schemas/electrocode-result.schema.json",
+  "title": "ElectroCodeQCResult",
+  "description": "Format JSON standard obligatoire des résultats de dimensionnement ÉlectroCode QC.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "meta",
+    "input",
+    "questions_asked",
+    "calculations",
+    "materials_list",
+    "code_references",
+    "warnings",
+    "compliance_status",
+    "disclaimer"
+  ],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "app_version",
+        "code_version",
+        "calculation_date",
+        "project_name",
+        "building_type"
+      ],
+      "properties": {
+        "app_version": { "type": "string", "minLength": 1 },
+        "code_version": { "type": "string", "minLength": 1 },
+        "calculation_date": { "type": "string", "format": "date-time" },
+        "project_name": { "type": "string" },
+        "building_type": {
+          "type": "string",
+          "enum": ["residential", "commercial", "institutional", "industrial"]
+        }
+      }
+    },
+    "input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "description",
+        "voltage",
+        "amperage",
+        "phases",
+        "loads",
+        "additional_info"
+      ],
+      "properties": {
+        "description": { "type": "string" },
+        "voltage": { "type": "string" },
+        "amperage": { "type": ["number", "null"] },
+        "phases": { "type": "integer", "enum": [1, 3] },
+        "loads": {
+          "type": "array",
+          "items": { "type": "object" }
+        },
+        "additional_info": { "type": "object" }
+      }
+    },
+    "questions_asked": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["question", "answer"],
+        "properties": {
+          "question": { "type": "string" },
+          "answer": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "calculations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "service",
+        "main_panel",
+        "sub_panels",
+        "transformers",
+        "breakers",
+        "conductors",
+        "conduits",
+        "grounding",
+        "voltage_drop"
+      ],
+      "properties": {
+        "service": { "type": "object" },
+        "main_panel": { "type": "object" },
+        "sub_panels": { "type": "array" },
+        "transformers": { "type": "array" },
+        "breakers": { "type": "array" },
+        "conductors": { "type": "array" },
+        "conduits": { "type": "array" },
+        "grounding": { "type": "object" },
+        "voltage_drop": { "type": "object" }
+      }
+    },
+    "materials_list": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["category", "description", "quantity", "unit", "notes"],
+        "properties": {
+          "category": { "type": "string" },
+          "description": { "type": "string" },
+          "quantity": { "type": "number" },
+          "unit": { "type": "string" },
+          "notes": { "type": "string" }
+        }
+      }
+    },
+    "code_references": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["rule", "table", "description"],
+        "properties": {
+          "rule": { "type": "string" },
+          "table": { "type": "string" },
+          "description": { "type": "string" }
+        }
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "compliance_status": {
+      "type": "string",
+      "enum": ["conforme", "non_conforme", "questions_en_attente"]
+    },
+    "disclaimer": {
+      "type": "string",
+      "const": "Ce dimensionnement est un outil d'aide. La responsabilité finale appartient à l'électricien titulaire de la licence."
+    }
+  }
+}

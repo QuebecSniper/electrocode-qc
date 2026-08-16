@@ -1,0 +1,14 @@
+name: Code QC watch
+
+on:
+  schedule:
+    - cron: "0 12 * * 1"
+  workflow_dispatch:
+
+jobs:
+  watch-rbq:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Veille pages RBQ
+        run: python3 tools/code_watch.py
