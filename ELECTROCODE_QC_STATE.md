@@ -10,8 +10,8 @@ V1 : résidentiel complet. Commercial / institutionnel / industriel : structuré
 
 ## % d’avancement
 
-**93 % de la V1 résidentielle** — Cycle 4 (interface terrain).  
-Règles de calcul toujours **gelées** au palier Cycle 3 (90 % moteur). Pas d’élargissement du moteur.
+**95 % de la V1 résidentielle** — Cycle 5 (guide Android + tests auto + OCR).  
+Règles de calcul toujours **gelées** au palier Cycle 3 (90 % moteur). Essais **sur téléphone** encore manuels.
 
 ## Version du Code électrique intégrée + date de dernière vérification
 
@@ -34,6 +34,8 @@ Règles de calcul toujours **gelées** au palier Cycle 3 (90 % moteur). Pas d’
 - Pas de LLM pour le dimensionnement
 - Remote GitHub privé : `QuebecSniper/electrocode-qc` (branche `main`)
 - Interface terrain Cycle 4 **validée** : cartes, gros boutons, résultat une page, disclaimer compact
+- OCR Cycle 5 : photo caméra 1920 px, PDF Tj/Flate, messages d’échec + saisie manuelle
+- Guide appareil : `docs/ANDROID_DEVICE_TEST.md`
 
 ## Modules développés / restants
 
@@ -48,12 +50,12 @@ Règles de calcul toujours **gelées** au palier Cycle 3 (90 % moteur). Pas d’
 - Recoupement Cycle 3 documenté (`docs/RECOUPEMENT_TABLES_C22.10-26.md`)
 - Tests moteur (dont recoupement T2/T4/T16/10-812) + tests Flutter
 - Interface terrain Cycle 4 : accueil, saisie groupée, questions en puces, résultat lisible au téléphone
+- Cycle 5 : guide test Android, widgets flux/CONFORME, OCR photo+PDF plus robuste
 
 ### Restants (hors gel V1 — ne pas ouvrir maintenant)
 
-- Lever le gel seulement pour viser T9I / T10A sur l’exemplaire officiel, ou pour un essai Android
-- OCR de PDF scanné (image) : passer par une photo
-- Validation dictée/OCR sur appareil Android
+- OCR de PDF scanné (image) : **photo** ou saisie (pas d’OCR PDF image)
+- Validation dictée/OCR **sur appareil Android** (guide prêt, pas encore exécuté)
 - Modules commercial / institutionnel / industriel
 - Transformateurs
 
@@ -89,6 +91,7 @@ Remote privé : `origin` → `https://github.com/QuebecSniper/electrocode-qc.git
 - JSON Schema Draft 2020-12 via Python `jsonschema`
 - Recoupement Cycle 3 : concordances publiques (electdesign, vrielectrical, guides 25e éd.). Pas de reproduction du texte CSA
 - Cycle 4 : UI seulement — aucun changement aux tables ni à `Dimensioner`. **Validé 2026-08-16.**
+- Cycle 5 : OCR/UI/tests seulement — aucun changement aux tables ni à `Dimensioner`
 
 ## Interface Cycle 4 (ce qui a changé)
 
@@ -119,14 +122,26 @@ Détail : [docs/RECOUPEMENT_TABLES_C22.10-26.md](docs/RECOUPEMENT_TABLES_C22.10-
 
 - **Limitations V1 gelées** : L-T5A (colonnes 60/75 °C), L-T9 (9A–9P), L-T10 (10A–10D) — voir section dédiée
 - Flutter pas dans le PATH machine (`%USERPROFILE%\flutter`)
-- Dictée / OCR photo non validées sur appareil
-- PDF scanné sans calque texte : photo requise
+- Dictée / OCR photo : **guide prêt**, pas encore validées sur appareil
+- PDF scanné sans calque texte : photo requise (message d’échec Cycle 5)
 
 ## Prochaine action exacte
 
-**Planifier le test sur appareil Android** (dictée fr_CA, photo/OCR, lisibilité chantier). **Ne pas** ouvrir commercial / institutionnel / industriel. **Ne pas** modifier le moteur.
+**Exécuter le guide** `docs/ANDROID_DEVICE_TEST.md` sur un téléphone (dictée fr_CA, photo, lisibilité, export). Remplir la grille OK / Problème. **Ne pas** ouvrir commercial / institutionnel / industriel. **Ne pas** modifier le moteur.
 
 ## Historique des cycles
+
+### Cycle 5 — 2026-08-16 — Android (prép.) + CI + OCR
+
+- Guide appareil : `docs/ANDROID_DEVICE_TEST.md` (dictée, photo, chantier, lisibilité, PDF/JSON, grille)
+- Auto vs manuel : `docs/TEST_AUTOMATION.md`
+- Tests widget : flux questions → résultat, CONFORME, NON CONFORME, disclaimer
+- Tests OCR : PDF texte, TJ, FlateDecode, PDF scanné, image vide
+- `ci.yml` lance aussi `test/compliance` (moteur)
+- OCR : caméra/galerie (max 1920 px), PDF Tj/hex/Flate, pas de fusion des messages d’échec dans les notes
+- Moteur **inchangé**
+- Avancement V1 : **95 %**
+- **Validé 2026-08-16**
 
 ### Cycle 4 — 2026-08-16 — interface terrain
 

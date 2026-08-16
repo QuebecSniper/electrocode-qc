@@ -64,8 +64,10 @@ schemas/                    JSON Schema du résultat
 packages/electrocode_engine Moteur Dart isolé + tests
 lib/                        Application Flutter
 .github/workflows/          CI prêts à pousser plus tard
-docs/GITHUB_PREP.md         Premier commit / push (remote pas encore créé)
+docs/GITHUB_PREP.md         Premier commit / push
 docs/RECOUPEMENT_TABLES_C22.10-26.md  Recoupement Cycle 3
+docs/ANDROID_DEVICE_TEST.md Guide essai téléphone
+docs/TEST_AUTOMATION.md     CI vs essais manuels
 ```
 
-Remote GitHub : **pas encore créé**. Voir [docs/GITHUB_PREP.md](docs/GITHUB_PREP.md).
+Remote : https://github.com/QuebecSniper/electrocode-qc.git (privé).

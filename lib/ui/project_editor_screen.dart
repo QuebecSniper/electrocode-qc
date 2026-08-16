@@ -120,36 +120,99 @@ class _ProjectEditorScreenState extends State<ProjectEditorScreen> {
   }
 
   Future<void> _dictate() async {
-    final text = await _voice.listenFrCa();
-    if (text == null) {
-      if (!mounted) return;
-      _snack('Dictée indisponible. Vérifiez le micro et la langue fr_CA.', error: true);
+    _snack('Écoute… parlez maintenant (français Québec).');
+    final heard = await _voice.listenFrCa();
+    if (!mounted) return;
+    if (!heard.ok || heard.text == null) {
+      _snack(heard.message, error: true);
       return;
     }
-    final merged = IntakeParser.mergeText(_collect(), text);
-    _desc.text = '${_desc.text} $text'.trim();
+    final merged = IntakeParser.mergeText(_collect(), heard.text!);
+    _desc.text = '${_desc.text} ${heard.text}'.trim();
     if (merged.livingAreaM2 != null) _area.text = '${merged.livingAreaM2}';
     if (merged.amperage != null) _amps.text = '${merged.amperage}';
+    if (merged.heatingWatts != null) _heat.text = '${merged.heatingWatts}';
     await _save(merged);
     if (!mounted) return;
-    _snack('Dictée ajoutée.');
+    _snack(heard.message);
   }
 
   Future<void> _attach() async {
-    final text = await _ocr.pickAndRecognize();
-    if (text == null) {
-      if (!mounted) return;
-      _snack(
-        'Aucun texte extrait. Photo nette ou PDF avec calque texte.',
-        error: true,
-      );
+    final choice = await showModalBottomSheet<String>(
+      context: context,
+      showDragHandle: true,
+      builder: (ctx) => SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: const Icon(Icons.photo_camera),
+              title: const Text('Prendre une photo'),
+              subtitle: const Text('Plan, cartouche, liste de charges'),
+              onTap: () => Navigator.pop(ctx, 'camera'),
+            ),
+            ListTile(
+              leading: const Icon(Icons.image_outlined),
+              title: const Text('Choisir une image'),
+              onTap: () => Navigator.pop(ctx, 'gallery'),
+            ),
+            ListTile(
+              leading: const Icon(Icons.picture_as_pdf),
+              title: const Text('Choisir un PDF'),
+              subtitle: const Text('Calque texte uniquement'),
+              onTap: () => Navigator.pop(ctx, 'pdf'),
+            ),
+            ListTile(
+              title: const Text('Annuler'),
+              onTap: () => Navigator.pop(ctx),
+            ),
+          ],
+        ),
+      ),
+    );
+    if (choice == null || !mounted) return;
+
+    showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => const AlertDialog(
+        content: Row(
+          children: [
+            CircularProgressIndicator(),
+            SizedBox(width: 16),
+            Expanded(child: Text('Lecture du document…')),
+          ],
+        ),
+      ),
+    );
+
+    ExtractResult extract;
+    try {
+      switch (choice) {
+        case 'camera':
+          extract = await _ocr.capturePhoto();
+        case 'gallery':
+          extract = await _ocr.pickGalleryImage();
+        default:
+          extract = await _ocr.pickAndRecognize();
+      }
+    } finally {
+      if (mounted) Navigator.of(context, rootNavigator: true).pop();
+    }
+    if (!mounted) return;
+    if (extract.status == ExtractStatus.cancelled) return;
+    if (!extract.hasText) {
+      _snack(extract.userMessage, error: true);
       return;
     }
-    final merged = IntakeParser.mergeText(_collect(), text);
-    _desc.text = '${_desc.text}\n$text'.trim();
+    final merged = IntakeParser.mergeText(_collect(), extract.text);
+    _desc.text = '${_desc.text}\n${extract.text}'.trim();
+    if (merged.livingAreaM2 != null) _area.text = '${merged.livingAreaM2}';
+    if (merged.amperage != null) _amps.text = '${merged.amperage}';
+    if (merged.heatingWatts != null) _heat.text = '${merged.heatingWatts}';
     await _save(merged);
     if (!mounted) return;
-    _snack('Texte importé de la pièce jointe.');
+    _snack(extract.userMessage);
   }
 
   Future<void> _run() async {

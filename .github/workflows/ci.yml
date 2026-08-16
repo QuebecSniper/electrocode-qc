@@ -22,6 +22,9 @@ jobs:
       - name: Unit tests engine
         run: dart test test/unit
         working-directory: packages/electrocode_engine
+      - name: Compliance tests engine
+        run: dart test test/compliance
+        working-directory: packages/electrocode_engine
       - name: Flutter pub get
         run: flutter pub get
       - name: Analyze app
